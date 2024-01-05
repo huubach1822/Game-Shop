@@ -1,0 +1,170 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Index_Layout.cshtml";
+}
+
+<style>
+    .categories__accordion .card-heading a[aria-expanded=true]:after, .categories__accordion .card-heading > a.active:after {
+        content: none;
+    }
+    .categories__accordion .card-heading.active a:after {
+        content: none;
+    }
+    .btn-success {
+        background-color: #a72828;
+        border-color: #212529;
+    }
+    .sidebar__filter > button {
+        text-transform: uppercase;
+        padding: 10px 40px;
+        border-radius: 5px;
+        display: block;
+        margin: 10px 65px;
+    }
+</style>
+@model GameShop.Models.ShopModel
+
+<!-- Breadcrumb Begin -->
+<div class="breadcrumb-option">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb__links">
+                    <a href="@Url.Action("Index","Index")"><i class="fa fa-home"></i> Home</a>
+                    <span>Shop</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+<!-- Shop Section Begin -->
+<section class="shop spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3">
+                <div class="shop__sidebar">
+                    <div class="sidebar__categories">
+                        <div class="section-title">
+                            <h4>Categories</h4>
+                        </div>
+                        <div class="categories__accordion">
+                            <div class="accordion" id="accordionExample">
+                                <div class="card">
+                                    @foreach (var item in Model.categoryList)
+                                    {
+                                        <div class="card-heading active">
+                                            <a href="@Url.Action("Index", "Shop", new { @id_cate = item.id })">@item.name</a>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @using (Html.BeginForm("Index", "Shop", FormMethod.Get))
+                    {
+                        <div class="sidebar__filter">
+                            <div class="section-title">
+                                <h4>Shop by price</h4>
+                            </div>
+
+                            <input type="number" name="id_cate" value="@ViewBag.CategoryId" hidden>
+                            <div class="filter-range-wrap">
+                                <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
+                                     data-min="1" data-max="200"></div>
+                                <div class="range-slider">
+                                    <div class="price-input">
+                                        <p>Price:</p>
+                                        <input type="text" id="minamount" name="min" value="1">
+                                        <input type="text" id="maxamount" name="max" value="200">
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-success" type="submit"> Filter </button>
+
+                        </div>
+
+                        <div class="sidebar__sizes">
+                            <div class="section-title">
+                                <h4>Shop by size</h4>
+                            </div>
+
+                            <div class="size__list">
+                                <label for="xxs">
+                                    Còn hàng
+                                    <input type="checkbox" id="xxs" name="isstock" value="true">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label for="xs">
+                                    Hot
+                                    <input type="checkbox" id="xs" name="ishot" value="true">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="col-lg-9 col-md-9">
+                <div class="row">
+                    @foreach (var item in Model.productList)
+                    {
+                        if (item.price_sale == 0)
+                        {
+                            <div class="col-lg-4 col-md-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="@Url.Content(item.avatar_url)">
+                                        <ul class="product__hover">
+                                            <li><a href="@Url.Content(item.avatar_url)" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>
+                                            <li><a href="@Url.Action("AddToCart", "CheckOut", new { @productId = item.id })"><span class="icon_bag_alt"></span></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <h6><a href="@Url.Action("DetailProducts", "Details" ,new { @MaSP = item.id })">@item.name</a></h6>
+                                        <div class="rating">
+                                            @for (int i = 1; i <= item.rate; i++)
+                                            {
+                                                <i class="fa fa-star"></i>
+                                            }
+                                        </div>
+                                        <div class="product__price">$ @item.price</div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-lg-4 col-md-6">
+                                <div class="product__item sale">
+                                    <div class="product__item__pic set-bg" data-setbg="@Url.Content(item.avatar_url)">
+                                        <div class="label" style="font-size: 14px;">Sale</div>
+                                        <ul class="product__hover">
+                                            <li><a href="@Url.Content(item.avatar_url)" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>
+                                            <li><a href="@Url.Action("AddToCart", "CheckOut", new { @productId = item.id })"><span class="icon_bag_alt"></span></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <h6><a href="@Url.Action("DetailProducts", "Details" ,new { @MaSP = item.id })">@item.name</a></h6>
+                                        <div class="rating">
+                                            @for (int i = 1; i <= item.rate; i++)
+                                            {
+                                                <i class="fa fa-star"></i>
+                                            }
+                                        </div>
+                                        <div class="product__price">$ @item.price_sale  <span>$ @item.price</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

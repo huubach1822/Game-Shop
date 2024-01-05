@@ -1,0 +1,35 @@
+﻿@model GameShop.Models.product_img_url
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>product_img_url</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.img_url)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.img_url)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.product.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.product.name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

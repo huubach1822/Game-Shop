@@ -1,0 +1,158 @@
+﻿@model GameShop.Models.IndexClass
+@{
+    ViewBag.Title = "DetailProducts";
+    Layout = "~/Views/Shared/Index_Layout.cshtml";
+}
+
+<!-- Breadcrumb Begin -->
+<div class="breadcrumb-option">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb__links">
+                    <a href=""><i class="fa fa-home"></i> Home</a>
+                    <a href="#">Shop</a>
+                    <span>@Model.detailProduct.name</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+
+<!-- Product Details Section Begin -->
+<section class="product-details spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="product__details__pic">
+                    <div class="product__details__pic__left product__thumb nice-scroll">
+                        <a class="pt active" href="#product-1">
+                            <img src="@Url.Content(Model.detailProduct.avatar_url)" alt="">
+                        </a>
+                        @{ var a = 2;
+                            foreach (var item in Model.lstImg)
+                            {
+                                <a class="pt active" href="#product-@a">
+                                    <img src="@Url.Content(item.img_url)" alt="">
+                                </a>
+                                a++;
+                            }
+                        }
+
+                    </div>
+                    <div class="product__details__slider__content">
+                        <div class="product__details__pic__slider owl-carousel">
+                            
+                            <img height="574px" data-hash="product-1" class="product__big__img" src="@Url.Content(Model.detailProduct.avatar_url)" alt="">
+                            @{ var b  = 2;
+                            foreach (var item in Model.lstImg)
+                            {
+                                <img height="574px" data-hash="product-@b" class="product__big__img"  src="@Url.Content(item.img_url)" alt="">
+                                    b++;
+
+                            }
+
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="product__details__text">
+                    <h3>@Model.detailProduct.name</h3>
+                    @for (int i = 1; i <= Model.detailProduct.rate; i++)
+                    {
+                        <i style="color: gold" class="fa fa-star"></i>
+
+                    }
+                    <span>( 138 reviews )</span>
+                    <div class="product__details__price">$ @Model.detailProduct.price</div>
+                    <p>
+                        @Model.detailProduct.description
+                    </p>
+                    <div class="product__details__button">
+                        <div class="quantity">
+                            <span>Quantity:</span>
+                            <div class="pro-qty">
+                                <input type="text" value="1">
+                            </div>
+                        </div>
+                        <a href="#" class="cart-btn"><span class="icon_bag_alt"></span> Add to cart</a>
+                        <ul>
+                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>
+                            <li><a href="#"><span class="icon_adjust-horiz"></span></a></li>
+                        </ul>
+                    </div>
+                    <div class="product__details__widget">
+                        <ul>
+                            <li>
+                                <span>Availability:</span>
+                                <div class="stock__checkbox">
+                                    <label for="stockin">
+                                        In Stock
+                                        <input type="checkbox" id="stockin">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <span>Promotions:</span>
+                                <p>Active Code</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="product__details__tab">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Description</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                            <h6>Description</h6>
+                            <p>@Model.detailProduct.description</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="related__title">
+                    <h5>RELATED PRODUCTS</h5>
+                </div>
+            </div>
+            @foreach (var item in Model.productList)
+            {
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="product__item">
+                        <div class="product__item__pic set-bg" data-setbg="@Url.Content(item.avatar_url)">
+                            <div class="label new">Hot</div>
+                            <ul class="product__hover">
+                                <li><a href="img/product/related/rp-1.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                <li><a href="#"><span class="icon_heart_alt"></span></a></li>
+                                <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                            </ul>
+                        </div>
+                        <div class="product__item__text">
+                            <h6><a href="@Url.Action("DetailProducts", "Detail" ,new { @MaSP = item.id })">@item.name</a></h6>
+                            <div class="rating">
+                                @for (int i = 1; i <= item.rate; i++)
+                                {
+                                    <i class="fa fa-star"></i>
+                                }
+                            </div>
+                            <div class="product__price">$ @item.price</div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        </div>
+</section>
+<!-- Product Details Section End -->

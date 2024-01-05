@@ -1,0 +1,233 @@
+﻿@using GameShop.Models
+@using PagedList.Mvc;
+@model PagedList.IPagedList<GameShop.Models.product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    if (Session["userName"] == null)
+    {
+        Response.Redirect("~/Admin/Login/Index");
+    }
+}
+<nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
+    <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
+        <h2 class="text-primary mb-0"><i class="fa fa-user-edit"></i></h2>
+    </a>
+    <a href="#" class="sidebar-toggler flex-shrink-0">
+        <i class="fa fa-bars"></i>
+    </a>
+    @using (Html.BeginForm("Index", "products1",
+                                    FormMethod.Get))
+    {
+        <input type="text" placeholder="What do yo u need?" name="searchString"  class=" bg-dark border-0" >
+
+        <button type="submit" class="site-btn btn-dark rounded">SEARCH</button>
+     @*   <form class="d-none d-md-flex ms-4">
+            <input class="form-control bg-dark border-0" type="search" placeholder="Search">
+        </form>*@
+    }
+    <div class="navbar-nav align-items-center ms-auto">
+        <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                <i class="fa fa-envelope me-lg-2"></i>
+                <span class="d-none d-lg-inline-flex">Message</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                <a href="#" class="dropdown-item">
+                    <div class="d-flex align-items-center">
+                        <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                        <div class="ms-2">
+                            <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                            <small>15 minutes ago</small>
+                        </div>
+                    </div>
+                </a>
+                <hr class="dropdown-divider">
+                <a href="#" class="dropdown-item">
+                    <div class="d-flex align-items-center">
+                        <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                        <div class="ms-2">
+                            <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                            <small>15 minutes ago</small>
+                        </div>
+                    </div>
+                </a>
+                <hr class="dropdown-divider">
+                <a href="#" class="dropdown-item">
+                    <div class="d-flex align-items-center">
+                        <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                        <div class="ms-2">
+                            <h6 class="fw-normal mb-0">Jhon send you a message</h6>
+                            <small>15 minutes ago</small>
+                        </div>
+                    </div>
+                </a>
+                <hr class="dropdown-divider">
+                <a href="#" class="dropdown-item text-center">See all message</a>
+            </div>
+        </div>
+        <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                <i class="fa fa-bell me-lg-2"></i>
+                <span class="d-none d-lg-inline-flex">Notificatin</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                <a href="#" class="dropdown-item">
+                    <h6 class="fw-normal mb-0">Profile updated</h6>
+                    <small>15 minutes ago</small>
+                </a>
+                <hr class="dropdown-divider">
+                <a href="#" class="dropdown-item">
+                    <h6 class="fw-normal mb-0">New user added</h6>
+                    <small>15 minutes ago</small>
+                </a>
+                <hr class="dropdown-divider">
+                <a href="#" class="dropdown-item">
+                    <h6 class="fw-normal mb-0">Password changed</h6>
+                    <small>15 minutes ago</small>
+                </a>
+                <hr class="dropdown-divider">
+                <a href="#" class="dropdown-item text-center">See all notifications</a>
+            </div>
+        </div>
+        <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+
+                <img class="rounded-circle me-lg-2" src="~/Asset/admin/img/hai.png" alt="" style="width: 40px; height: 40px;">
+                <span class="d-none d-lg-inline-flex">John Doe</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                <a href="#" class="dropdown-item">My Profile</a>
+                <a href="#" class="dropdown-item">Settings</a>
+                <a href="#" class="dropdown-item">Log Out</a>
+            </div>
+        </div>
+    </div>
+</nav>
+@*@using (Html.BeginForm("Index", "products1",
+                                    FormMethod.Get))
+{
+ 
+    <input type="text" placeholder="What do yo u need?" name="searchString">
+
+    <button type="submit" class="site-btn">SEARCH</button>
+}*@
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            name
+        </th>
+        <th>
+            update date
+        </th>
+        <th>
+            status
+        </th>
+        <th>
+            deleted
+        </th>
+        <th>
+            price
+        </th>
+        <th>
+            price sale
+        </th>
+        <th>
+            quantity
+        </th>
+        <th>
+            active code
+        </th>
+        <th>
+            description
+        </th>
+        <th>
+            is Hot
+        </th>
+        <th>
+            create at
+        </th>
+        <th>
+            rate
+        </th>
+        <th>
+            avatar
+        </th>
+        <th>
+            crated user
+        </th>
+        <th>
+            category
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.updated_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.deleted)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.price_sale)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.active_code)
+            </td>
+            <td>
+            @*    @Html.DisplayFor(modelItem => item.description)*@
+                @Html.Raw(@item.description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.isHot)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.create_at)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.rate)
+            </td>
+            <td>
+                @if (item.avatar_url != null)
+                {
+                    <img src="@Url.Content(item.avatar_url)" style="height:50px;width:50px;margin:10px" id="previewImage" />
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.create_user)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.category.name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id })
+            </td>
+        </tr>
+    }
+
+</table>
+Trang @(Model.PageCount<Model.PageNumber?0:Model.PageNumber)/@Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page = page, searchString = ViewBag.SearchString }))

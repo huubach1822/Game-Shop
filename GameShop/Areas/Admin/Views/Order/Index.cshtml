@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@model List<GameShop.Models.order>
+<div class="col-12">
+    <div class="bg-secondary rounded h-100 p-4">
+        <h6 class="mb-4">Responsive Table @ViewBag.Error</h6>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Code</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">CreateAt</th>
+                        <th scope="col">Total Money</th>
+                        <th scope="col">Accept</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <th scope="row">@item.id</th>
+                            <td>@item.code</td>
+                            <td>@item.email</td>
+                            <td>@if(item.status == null || item.status == 0) { <p>Chưa hoàn thành</p> }
+                                    else {<p>Đã thanh toán</p> }</td>
+                            <td>@item.create_at</td>
+                            <td>@item.totalMoney$</td>
+                            <td> <button type="button"
+                                         onclick="location.href='@Url.Action("Approve", "Order",
+                                                                new {@email = item.email,@id=item.id})'"
+                                         class="btn btn-success rounded-pill m-2">Approve</button></td>
+                        </tr>
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

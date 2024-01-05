@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Index_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<div id="list-products"></div>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        var r = '';
+        $.getJSON('/api/apigame', function (data) {
+            $.each(data, function (key, val) {
+                 r += '<p>' + val.name + '<p>'
+                r += '<p>' + val.category_id + '<p>'
+                r += '<p>' + val.price + '<p>'
+                r += '<p>' + val.avatar_url + '<p>'
+            });
+            $('#list-products').html(r);
+        });
+
+    });
+
+</script>

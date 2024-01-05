@@ -1,0 +1,557 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="game_shop_webModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="banner">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="img_url" Type="varchar" MaxLength="1000" />
+          <Property Name="title" Type="varchar" MaxLength="550" />
+          <Property Name="description" Type="varchar(max)" />
+          <Property Name="deleted" Type="bit" />
+          <Property Name="create_at" Type="date" Nullable="false" />
+          <Property Name="update_at" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="blog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar(max)" />
+          <Property Name="description_head" Type="nvarchar(max)" />
+          <Property Name="description_body" Type="nvarchar(max)" />
+          <Property Name="status" Type="int" />
+          <Property Name="create_at" Type="date" />
+          <Property Name="update_at" Type="date" />
+          <Property Name="deleted" Type="bit" />
+          <Property Name="avatar_url" Type="nvarchar" MaxLength="1000" />
+          <Property Name="video_url" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="name" Type="varchar" MaxLength="255" />
+          <Property Name="deleted" Type="bit" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="create_at" Type="date" />
+          <Property Name="update_at" Type="date" />
+        </EntityType>
+        <EntityType Name="order_product">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="quantity" Type="int" />
+          <Property Name="create_at" Type="date" />
+          <Property Name="update_at" Type="date" />
+          <Property Name="product_id" Type="int" Nullable="false" />
+          <Property Name="orders_id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="orders">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="create_at" Type="date" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="varchar" MaxLength="255" />
+          <Property Name="username" Type="varchar" MaxLength="255" />
+          <Property Name="email" Type="varchar" MaxLength="255" />
+          <Property Name="status" Type="int" />
+          <Property Name="update_at" Type="date" />
+          <Property Name="deleted" Type="bit" />
+          <Property Name="users_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="updated_date" Type="date" />
+          <Property Name="status" Type="int" />
+          <Property Name="deleted" Type="bit" />
+          <Property Name="price" Type="int" Nullable="false" />
+          <Property Name="price_sale" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="quantity" Type="int" Nullable="false" />
+          <Property Name="active_code" Type="varchar" MaxLength="255" />
+          <Property Name="description" Type="varchar" MaxLength="1000" />
+          <Property Name="isHot" Type="bit" />
+          <Property Name="create_at" Type="int" />
+          <Property Name="rate" Type="int" />
+          <Property Name="avatar_url" Type="varchar" MaxLength="1000" />
+          <Property Name="category_id" Type="int" />
+          <Property Name="create_user" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="product_img_url">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="img_url" Type="varchar(max)" />
+          <Property Name="product_id" Type="int" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="phone" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="update_at" Type="date" />
+          <Property Name="deleted" Type="bit" />
+          <Property Name="permission" Type="int" />
+          <Property Name="create_at" Type="date" />
+          <Property Name="img_url" Type="varchar" MaxLength="510" />
+          <Property Name="Email" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <Association Name="FK__order_pro__order__4AB81AF0">
+          <End Role="orders" Type="Self.orders" Multiplicity="1" />
+          <End Role="order_product" Type="Self.order_product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orders">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_product">
+              <PropertyRef Name="orders_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__order_pro__produ__4BAC3F29">
+          <End Role="product" Type="Self.product" Multiplicity="1" />
+          <End Role="order_product" Type="Self.order_product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_product">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__orders__users_id__4CA06362">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="users_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__product__categor__4D94879B">
+          <End Role="category" Type="Self.category" Multiplicity="0..1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__product_i__produ__4E88ABD4">
+          <End Role="product" Type="Self.product" Multiplicity="0..1" />
+          <End Role="product_img_url" Type="Self.product_img_url" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="product_img_url">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="game_shop_webModelStoreContainer">
+          <EntitySet Name="banner" EntityType="Self.banner" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="blog" EntityType="Self.blog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="order_product" EntityType="Self.order_product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="orders" EntityType="Self.orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="product" EntityType="Self.product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="product_img_url" EntityType="Self.product_img_url" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__order_pro__order__4AB81AF0" Association="Self.FK__order_pro__order__4AB81AF0">
+            <End Role="orders" EntitySet="orders" />
+            <End Role="order_product" EntitySet="order_product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__order_pro__produ__4BAC3F29" Association="Self.FK__order_pro__produ__4BAC3F29">
+            <End Role="product" EntitySet="product" />
+            <End Role="order_product" EntitySet="order_product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__orders__users_id__4CA06362" Association="Self.FK__orders__users_id__4CA06362">
+            <End Role="users" EntitySet="users" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__product__categor__4D94879B" Association="Self.FK__product__categor__4D94879B">
+            <End Role="category" EntitySet="category" />
+            <End Role="product" EntitySet="product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__product_i__produ__4E88ABD4" Association="Self.FK__product_i__produ__4E88ABD4">
+            <End Role="product" EntitySet="product" />
+            <End Role="product_img_url" EntitySet="product_img_url" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="game_shop_webModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="banner">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="img_url" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="title" Type="String" MaxLength="550" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="deleted" Type="Boolean" />
+          <Property Name="create_at" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="update_at" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="blog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="Int32" />
+          <Property Name="create_at" Type="DateTime" Precision="0" />
+          <Property Name="update_at" Type="DateTime" Precision="0" />
+          <Property Name="deleted" Type="Boolean" />
+          <Property Name="description_head" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="description_body" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="avatar_url" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="video_url" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="deleted" Type="Boolean" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="create_at" Type="DateTime" Precision="0" />
+          <Property Name="update_at" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="products" Relationship="Self.FK__product__categor__3E52440B" FromRole="category" ToRole="product" />
+        </EntityType>
+        <EntityType Name="order">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="create_at" Type="DateTime" Precision="0" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="username" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="Int32" />
+          <Property Name="update_at" Type="DateTime" Precision="0" />
+          <Property Name="deleted" Type="Boolean" />
+          <Property Name="users_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="order_product" Relationship="Self.FK__order_pro__order__45F365D3" FromRole="orders" ToRole="order_product" />
+          <NavigationProperty Name="user" Relationship="Self.FK__orders__users_id__4316F928" FromRole="orders" ToRole="users" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="updated_date" Type="DateTime" Precision="0" />
+          <Property Name="status" Type="Int32" />
+          <Property Name="deleted" Type="Boolean" />
+          <Property Name="price" Type="Int32" Nullable="false" />
+          <Property Name="price_sale" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <Property Name="active_code" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="isHot" Type="Boolean" />
+          <Property Name="create_at" Type="Int32" />
+          <Property Name="rate" Type="Int32" />
+          <Property Name="avatar_url" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="category_id" Type="Int32" />
+          <Property Name="create_user" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="category" Relationship="Self.FK__product__categor__3E52440B" FromRole="product" ToRole="category" />
+          <NavigationProperty Name="order_product" Relationship="Self.FK__order_pro__produ__44FF419A" FromRole="product" ToRole="order_product" />
+          <NavigationProperty Name="product_img_url" Relationship="Self.FK__product_i__produ__4E88ABD4" FromRole="product" ToRole="product_img_url" />
+        </EntityType>
+        <EntityType Name="product_img_url">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="img_url" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="product_id" Type="Int32" />
+          <NavigationProperty Name="product" Relationship="Self.FK__product_i__produ__4E88ABD4" FromRole="product_img_url" ToRole="product" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="update_at" Type="DateTime" Precision="0" />
+          <Property Name="deleted" Type="Boolean" />
+          <Property Name="permission" Type="Int32" />
+          <Property Name="create_at" Type="DateTime" Precision="0" />
+          <Property Name="img_url" Type="String" MaxLength="510" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="orders" Relationship="Self.FK__orders__users_id__4316F928" FromRole="users" ToRole="orders" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="order_product">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="create_at" Type="DateTime" Precision="0" />
+          <Property Name="update_at" Type="DateTime" Precision="0" />
+          <Property Name="product_id" Type="Int32" Nullable="false" />
+          <Property Name="orders_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="order" Relationship="Self.FK__order_pro__order__45F365D3" FromRole="order_product" ToRole="orders" />
+          <NavigationProperty Name="product" Relationship="Self.FK__order_pro__produ__44FF419A" FromRole="order_product" ToRole="product" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <Association Name="FK__product__categor__3E52440B">
+          <End Role="category" Type="Self.category" Multiplicity="0..1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__order_pro__order__45F365D3">
+          <End Role="orders" Type="Self.order" Multiplicity="1" />
+          <End Role="order_product" Type="Self.order_product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orders">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_product">
+              <PropertyRef Name="orders_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__orders__users_id__4316F928">
+          <End Role="users" Type="Self.user" Multiplicity="1" />
+          <End Role="orders" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="users_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__order_pro__produ__44FF419A">
+          <End Role="product" Type="Self.product" Multiplicity="1" />
+          <End Role="order_product" Type="Self.order_product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order_product">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__product_i__produ__4E88ABD4">
+          <End Role="product" Type="Self.product" Multiplicity="0..1" />
+          <End Role="product_img_url" Type="Self.product_img_url" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="product_img_url">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="game_shop_webEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="banners" EntityType="Self.banner" />
+          <EntitySet Name="blogs" EntityType="Self.blog" />
+          <EntitySet Name="categories" EntityType="Self.category" />
+          <EntitySet Name="orders" EntityType="Self.order" />
+          <EntitySet Name="products" EntityType="Self.product" />
+          <EntitySet Name="product_img_url" EntityType="Self.product_img_url" />
+          <EntitySet Name="users" EntityType="Self.user" />
+          <EntitySet Name="order_product" EntityType="Self.order_product" />
+          <AssociationSet Name="FK__product__categor__3E52440B" Association="Self.FK__product__categor__3E52440B">
+            <End Role="category" EntitySet="categories" />
+            <End Role="product" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__order_pro__order__45F365D3" Association="Self.FK__order_pro__order__45F365D3">
+            <End Role="orders" EntitySet="orders" />
+            <End Role="order_product" EntitySet="order_product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__orders__users_id__4316F928" Association="Self.FK__orders__users_id__4316F928">
+            <End Role="users" EntitySet="users" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__order_pro__produ__44FF419A" Association="Self.FK__order_pro__produ__44FF419A">
+            <End Role="product" EntitySet="products" />
+            <End Role="order_product" EntitySet="order_product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__product_i__produ__4E88ABD4" Association="Self.FK__product_i__produ__4E88ABD4">
+            <End Role="product" EntitySet="products" />
+            <End Role="product_img_url" EntitySet="product_img_url" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="game_shop_webModelStoreContainer" CdmEntityContainer="game_shop_webEntities">
+          <EntitySetMapping Name="banners">
+            <EntityTypeMapping TypeName="game_shop_webModel.banner">
+              <MappingFragment StoreEntitySet="banner">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="img_url" ColumnName="img_url" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
+                <ScalarProperty Name="update_at" ColumnName="update_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="blogs">
+            <EntityTypeMapping TypeName="game_shop_webModel.blog">
+              <MappingFragment StoreEntitySet="blog">
+                <ScalarProperty Name="video_url" ColumnName="video_url" />
+                <ScalarProperty Name="avatar_url" ColumnName="avatar_url" />
+                <ScalarProperty Name="description_body" ColumnName="description_body" />
+                <ScalarProperty Name="description_head" ColumnName="description_head" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
+                <ScalarProperty Name="update_at" ColumnName="update_at" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="categories">
+            <EntityTypeMapping TypeName="game_shop_webModel.category">
+              <MappingFragment StoreEntitySet="category">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
+                <ScalarProperty Name="update_at" ColumnName="update_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="orders">
+            <EntityTypeMapping TypeName="game_shop_webModel.order">
+              <MappingFragment StoreEntitySet="orders">
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="update_at" ColumnName="update_at" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="users_id" ColumnName="users_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="products">
+            <EntityTypeMapping TypeName="game_shop_webModel.product">
+              <MappingFragment StoreEntitySet="product">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="updated_date" ColumnName="updated_date" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="price_sale" ColumnName="price_sale" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="active_code" ColumnName="active_code" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="isHot" ColumnName="isHot" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
+                <ScalarProperty Name="rate" ColumnName="rate" />
+                <ScalarProperty Name="avatar_url" ColumnName="avatar_url" />
+                <ScalarProperty Name="category_id" ColumnName="category_id" />
+                <ScalarProperty Name="create_user" ColumnName="create_user" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="product_img_url">
+            <EntityTypeMapping TypeName="game_shop_webModel.product_img_url">
+              <MappingFragment StoreEntitySet="product_img_url">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="img_url" ColumnName="img_url" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="game_shop_webModel.user">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="update_at" ColumnName="update_at" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="permission" ColumnName="permission" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
+                <ScalarProperty Name="img_url" ColumnName="img_url" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="order_product">
+            <EntityTypeMapping TypeName="game_shop_webModel.order_product">
+              <MappingFragment StoreEntitySet="order_product">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
+                <ScalarProperty Name="update_at" ColumnName="update_at" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="orders_id" ColumnName="orders_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "Blog";
+    Layout = "~/Views/Shared/Index_Layout.cshtml";
+}
+@model  List<GameShop.Models.blog>
+
+<!-- Breadcrumb Begin -->
+<div class="breadcrumb-option">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb__links">
+                    <a href="@Url.Action("Index","Index")"><i class="fa fa-home"></i> Home</a>
+                    <span>Blog</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+
+<section class="blog spad">
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="blog__item">
+                        <div class="blog__item__pic set-bg" data-setbg="@Url.Content(item.avatar_url)"></div>
+                        <div class="blog__item__text">
+                            <h6><a href="@Url.Action("DetailBlog", "Blog", new {@Id = item.id})">@item.title</a></h6>
+                            <ul>
+                                <li>by <span>Tran Minh Hien</span></li>
+                                <li>@item.create_at
+                                <li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</section>

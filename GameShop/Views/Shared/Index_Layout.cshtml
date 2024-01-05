@@ -1,0 +1,288 @@
+﻿<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ashion Template">
+    <meta name="keywords" content="Ashion, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ashion | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="~/Asset/user/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="~/Asset/user/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="~/Asset/user/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="~/Asset/user/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="~/Asset/user/css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="~/Asset/user/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="~/Asset/user/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="~/Asset/user/css/style.css" type="text/css">
+    
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Offcanvas Menu Begin -->
+    <div class="offcanvas-menu-overlay"></div>
+    <div class="offcanvas-menu-wrapper">
+        <div class="offcanvas__close">+</div>
+        <ul class="offcanvas__widget">
+            <li><span class="icon_search search-switch"></span></li>
+            <li>
+                <a href="#">
+                    <span class="icon_heart_alt"></span>
+                    <div class="tip">0</div>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Cart","CheckOut")">
+                    <span class="icon_bag_alt"></span>
+                    <div class="tip">@Html.Action("cart", "index")</div>
+                </a>
+            </li>
+
+        </ul>
+        <div class="offcanvas__logo">
+            <a href="@Url.Action("Index","Index")"><img src="~/Asset/user/img/images.png" alt="" width="200" height="600"></a>
+        </div>
+        <div id="mobile-menu-wrap"></div>
+        <div class="offcanvas__auth">
+            <a href="@Url.Action("Index","Login",new  {area = "Admin"})">Login</a>
+            <a href="@Url.Action("Register","Login",new  {area = "Admin"})">Register</a>
+        </div>
+    </div>
+    <!-- Offcanvas Menu End -->
+    <!-- Header Section Begin -->
+    <header class="header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-3 col-lg-2">
+                    <div class="header__logo">
+                        <a href="@Url.Action("Index","Index")"><img src="~/Asset/user/img/logoWeb.png" width="100" height="70" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-7">
+                    <nav class="header__menu">
+                        <ul>
+                            <li class="active"><a href="@Url.Action("Index","Index")">Home</a></li>
+                            <li><a href="#">Game</a></li>
+                            <li><a href="#">App key</a></li>
+                            <li><a href="@Url.Action("Index","Shop")">Shop</a></li>
+                            <li>
+                                <a href="#">Pages</a>
+                                <ul class="dropdown">
+
+                                    <li><a href="@Url.Action("Cart","CheckOut")">Shop Cart</a></li>
+                                    <li><a href="@Url.Action("checkout","checkout")">Checkout</a></li>
+
+                                </ul>
+                            </li>
+                            <li><a href="@Url.Action("Blog","Blog")">Blog</a></li>
+                            <li><a href="./contact.html">Contact</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-lg-3">
+                    <div class="header__right">
+                        <div class="header__right__auth">
+                            <a href="@Url.Action("Index","Login",new  {area = "Admin"})">Login</a>
+                            <a href="@Url.Action("Register","Login",new  {area = "Admin"})">Register</a>
+                        </div>
+                        <ul class="header__right__widget">
+                            <li><span class="icon_search search-switch"></span></li>
+                            <li>
+                                <a href="#">
+                                    <span class="icon_heart_alt"></span>
+                                    <div class="tip">0</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Cart","CheckOut")">
+                                    <span class="icon_bag_alt"></span>
+                                    <div class="tip">@Html.Action("cart", "index")</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="canvas__open">
+                <i class="fa fa-bars"></i>
+            </div>
+        </div>
+    </header>
+    <!-- Header Section End -->
+    @RenderBody()
+    <!-- Instagram Begin -->
+    <div class="instagram">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
+                    <div class="instagram__item set-bg" data-setbg="/Asset/user/img/Riotgames-ins.png">
+                        <div class="instagram__text">
+                            <i class="fa fa-twitter"></i>
+                            <a href="https://twitter.com/riotgames">Riot Games</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
+                    <div class="instagram__item set-bg" data-setbg="/Asset/user/img/eg-ins.jpg">
+                        <div class="instagram__text">
+                            <i class="fa fa-twitter"></i>
+                            <a href="https://twitter.com/EpicGames">Epic Games</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
+                    <div class="instagram__item set-bg" data-setbg="/Asset/user/img/nexon.png">
+                        <div class="instagram__text">
+                            <i class="fa fa-twitter"></i>
+                            <a href="https://twitter.com/nexon_america">Nexon</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
+                    <div class="instagram__item set-bg" data-setbg="/Asset/user/img/Steam-ins.jpg">
+                        <div class="instagram__text">
+                            <i class="fa fa-twitter"></i>
+                            <a href="https://twitter.com/Steam">Steam</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
+                    <div class="instagram__item set-bg" data-setbg="/Asset/user/img/nintendo-ins.png">
+                        <div class="instagram__text">
+                            <i class="fa fa-twitter"></i>
+                            <a href="https://twitter.com/NintendoAmerica">Nintendo</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
+                    <div class="instagram__item set-bg" data-setbg="/Asset/user/img/ubisoft-ins.png">
+                        <div class="instagram__text">
+                            <i class="fa fa-twitter"></i>
+                            <a href="https://twitter.com/Ubisoft">Ubisoft</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Section Begin -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-7">
+                    <div class="footer__about">
+                        <div class="footer__logo">
+                            <a href="@Url.Action("Index","Index")"><img src="~/Asset/user/img/logoWeb.png" width="100" height="70" alt=""></a>
+                        </div>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                            cilisis.
+                        </p>
+                        <div class="footer__payment">
+                            <a href="#"><img src="~/Asset/user/img/payment/payment-1.png" alt=""></a>
+                            <a href="#"><img src="~/Asset/user/img/payment/payment-2.png" alt=""></a>
+                            <a href="#"><img src="~/Asset/user/img/payment/payment-3.png" alt=""></a>
+                            <a href="#"><img src="~/Asset/user/img/payment/payment-4.png" alt=""></a>
+                            <a href="#"><img src="~/Asset/user/img/payment/payment-5.png" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-5">
+                    <div class="footer__widget">
+                        <h6>Quick links</h6>
+                        <ul>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Blogs</a></li>
+                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">FAQ</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-4">
+                    <div class="footer__widget">
+                        <h6>Account</h6>
+                        <ul>
+                            <li><a href="#">My Account</a></li>
+                            <li><a href="#">Orders Tracking</a></li>
+                            <li><a href="#">Checkout</a></li>
+                            <li><a href="#">Wishlist</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-8 col-sm-8">
+                    <div class="footer__newslatter">
+                        <h6>NEWSLETTER</h6>
+                        <form action="#">
+                            <input type="text" placeholder="Email">
+                            <button type="submit" class="site-btn">Subscribe</button>
+                        </form>
+                        <div class="footer__social">
+                            <a href="https://www.facebook.com/profile.php?id=100004962016195"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-youtube-play"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa-pinterest"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
+    <!-- Search Begin -->
+    <div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch">+</div>
+            @using (Html.BeginForm("Index", "Index", FormMethod.Get, new { @class = "search-model-form" }))
+            {
+                    <input type="text" id="search-input" placeholder="Search here....." name="SearchString">
+            }
+            </div>
+    </div>
+    <!-- Search End -->
+    <!-- Js Plugins -->
+    <script src="~/Asset/user/js/jquery-3.3.1.min.js"></script>
+    <script src="~/Asset/user/js/bootstrap.min.js"></script>
+    <script src="~/Asset/user/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Asset/user/js/jquery-ui.min.js"></script>
+    <script src="~/Asset/user/js/mixitup.min.js"></script>
+    <script src="~/Asset/user/js/jquery.countdown.min.js"></script>
+    <script src="~/Asset/user/js/jquery.slicknav.js"></script>
+    <script src="~/Asset/user/js/owl.carousel.min.js"></script>
+    <script src="~/Asset/user/js/jquery.nicescroll.min.js"></script>
+    <script src="~/Asset/user/js/main.js"></script>
+    <script>
+        var rangeSlider = $(".price-range"),
+            minamount = $("#minamount"),
+            maxamount = $("#maxamount"),
+            minPrice = rangeSlider.data('min'),
+            maxPrice = rangeSlider.data('max');
+        rangeSlider.slider({
+            range: true,
+            min: minPrice,
+            max: maxPrice,
+            values: [1, 100],
+            slide: function (event, ui) {
+                minamount.val(ui.values[0]);
+                maxamount.val(ui.values[1]);
+            }
+        });
+        minamount.val(rangeSlider.slider("values", 0));
+        maxamount.val(rangeSlider.slider("values", 1));
+    </script>
+</body>
+
+</html>
+

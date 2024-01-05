@@ -1,0 +1,158 @@
+﻿
+@{
+    ViewBag.Title = "DetailBlog";
+    Layout = "~/Views/Shared/Index_Layout.cshtml";
+}
+
+@model GameShop.Models.BlogClass
+
+<!-- Breadcrumb Begin -->
+<div class="breadcrumb-option">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb__links">
+                    <a href="@Url.Action("Index","Index")"><i class="fa fa-home"></i> Home</a>
+                    <a href="@Url.Action("Blog","Blog")">Blog</a>
+                    <span>Bạn muốn biết thêm thông tin về những tựa game đang hot?</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+<!-- Blog Details Section Begin -->
+<section class="blog-details spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-8">
+                <div class="blog__details__content">
+                    <div class="blog__details__item">
+                        <img src="@Url.Content(Model.DetailBlog.avatar_url)" width="750px" height="500px" alt="">
+                        <div class="blog__details__item__title">
+                            <span class="tip">Thông tin Game</span>
+                            <h4>@Url.Content(Model.DetailBlog.title)</h4>
+                            <ul>
+                                <li>by <span>Trần Minh Hiển</span></li>
+                                <li>@Url.Content(Convert.ToString(Model.DetailBlog.create_at))</li>                        
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="blog__details__desc">
+                        <p>
+
+                            @Url.Content(Model.DetailBlog.description_head)
+                        </p>
+
+                    </div>
+                    <div class="blog__details__desc">
+                        <iframe width="700" height="400" src="@Url.Content(Model.DetailBlog.video_url)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="blog__details__desc">
+
+                        <p>
+
+                            @Url.Content(Model.DetailBlog.description_body)
+                        </p>
+                    </div>
+
+
+                    <div class="blog__details__tags">
+                        <a href="#">Game24h</a>
+                        <a href="#">Thông tin game</a>
+                        <a href="#">Tin tức</a>
+                    </div>
+
+                    @*<div class="blog__details__comment">
+                            <h5>3 Comment</h5>
+                            <a href="#" class="leave-btn">Leave a comment</a>
+                            <div class="blog__comment__item">
+                                <div class="blog__comment__item__pic">
+                                    <img src="~/asset/admin/img/img_blog/hai.png" width="90px" height="90px" alt="">
+                                </div>
+                                <div class="blog__comment__item__text">
+                                    <h6>Khánh béo 8c</h6>
+                                    <p>
+                                        Trên cả tuyệt vời
+                                    </p>
+                                    <ul>
+                                        <li><i class="fa fa-clock-o"></i> Seb 17, 2019</li>
+                                        <li><i class="fa fa-heart-o"></i> 12</li>
+                                        <li><i class="fa fa-share"></i> 1</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="blog__comment__item blog__comment__item--reply">
+                                <div class="blog__comment__item__pic">
+                                    <img src="~/asset/admin/img/img_blog/hai.png" width="90px" height="90px" alt="">
+                                </div>
+                                <div class="blog__comment__item__text">
+                                    <h6>Hải sad thủ</h6>
+                                    <p>
+                                        Quá hay
+                                    </p>
+                                    <ul>
+                                        <li><i class="fa fa-clock-o"></i> Seb 17, 2019</li>
+                                        <li><i class="fa fa-heart-o"></i> 12</li>
+                                        <li><i class="fa fa-share"></i> 1</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="blog__comment__item">
+                                <div class="blog__comment__item__pic">
+                                    <img src="~/asset/admin/img/img_blog/bach.jpg" width="90px" height="90px" alt="">
+                                </div>
+                                <div class="blog__comment__item__text">
+                                    <h6>Bách - C4 Keqing</h6>
+                                    <p>
+                                        Tuyệt vời
+                                    </p>
+                                    <ul>
+                                        <li><i class="fa fa-clock-o"></i> Seb 17, 2019</li>
+                                        <li><i class="fa fa-heart-o"></i> 12</li>
+                                        <li><i class="fa fa-share"></i> 1</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>*@
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4">
+                <div class="blog__sidebar">
+                    <div class="blog__sidebar__item">
+                        <div class="section-title">
+                            <h4>Top search</h4>
+                        </div>
+                        <ul>
+                            <li><a href="#">Thông tin game </a></li>
+                            <li><a href="#">Tin tức game </a></li>
+                            <li><a href="#">Blog </a></li>
+
+                        </ul>
+                    </div>
+                    <div class="blog__sidebar__item">
+                        <div class="section-title">
+                            <h4>Feature posts</h4>
+                        </div>
+
+                        @foreach (var item in Model.blogList)
+                        {
+
+                            <a href="@Url.Action("DetailBlog", "Blog", new {@Id = item.id})" class="blog__feature__item">
+                                <div class="blog__feature__item__pic">
+                                    <img src="@Url.Content(item.avatar_url)" width="110px" height="73px" alt="">
+                                </div>
+                                <div class="blog__feature__item__text">
+                                    <h6> @item.title</h6>
+                                    <span>@item.update_at</span>
+                                </div>
+                            </a>
+
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Blog Details Section End -->
